@@ -2,6 +2,7 @@ package com.itheima.myalgorithm;
 
 import com.itheima.myalgorithm.dataStructure.SinglyLinkedList;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -61,6 +62,26 @@ public class TestSinglyLinkedList {
 
 		// int j = list.get(10); 索引不合法
 		// System.out.println(j);
+
+	}
+
+	@Test
+	@DisplayName("测试 insert")
+	public void testInsert(){
+		SinglyLinkedList list = new SinglyLinkedList();
+		list.addLast(1);
+		list.addLast(2);
+		list.addLast(4); // index = 2
+		list.addLast(5);
+
+		list.insert(2, 3);
+		Assertions.assertIterableEquals(List.of(1,2,3,4,5), list);
+
+		list.insert(0, 0);
+		Assertions.assertIterableEquals(List.of(0,1,2,3,4,5), list);
+
+		// 索引不合法
+		// list.insert(10, 10);
 
 	}
 
