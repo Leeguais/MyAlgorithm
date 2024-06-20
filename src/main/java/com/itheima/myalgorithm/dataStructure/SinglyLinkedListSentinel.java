@@ -9,9 +9,10 @@ import java.util.function.Consumer;
  * @date 2024/6/19 9:22
  * @Version 1.0
  */
-public class SinglyLinkedList implements Iterable<Integer>{ // 整体
-	// 头指针，链表为空是为 null , 链表非空时为第一个元素
-	private Node head = null;
+public class SinglyLinkedListSentinel implements Iterable<Integer>{ // 整体
+	// 头指针指向哨兵节点
+	private Node head = new Node(666, null);
+
 
 	/**
 	 * 索引异常
@@ -26,8 +27,8 @@ public class SinglyLinkedList implements Iterable<Integer>{ // 整体
 	@Override
 	public Iterator<Integer> iterator(){
 		return new Iterator<Integer>(){
-			// 指针变量
-			Node p = head;
+			// 指针变量起点
+			Node p = head.next;
 
 			@Override
 			public boolean hasNext(){ // 查看是否有下一个元素
@@ -60,12 +61,8 @@ public class SinglyLinkedList implements Iterable<Integer>{ // 整体
 	 */
 	public void addLast(int value){
 		Node last = findLast();
-		// 链表为空
-		if(findLast() == null){
-			addFirst(value);
-			return;
-		}
-		// 链表非空
+
+		// 链表若没有有效元素，在哨兵节点后直接加入新元素
 		last.next = new Node(value, null);
 	}
 
@@ -75,12 +72,6 @@ public class SinglyLinkedList implements Iterable<Integer>{ // 整体
 	 * @return 若找到返回 Node , 链表为空返回 null
 	 */
 	private Node findLast(){
-		// 1.链表为空
-		if(head == null){
-			return head;
-		}
-
-		// 2.链表非空
 		Node p;
 		for(p = head; p.next != null; p = p.next){
 		}
@@ -93,8 +84,8 @@ public class SinglyLinkedList implements Iterable<Integer>{ // 整体
 	 * @param consumer
 	 */
 	public void loop1(Consumer<Integer> consumer){
-		// 遍历指针
-		Node p = head;
+		// 遍历指针起点
+		Node p = head.next;
 		// 当指针没有指向最后一个元素的后一个 null 时继续遍历
 		while(p != null){
 			consumer.accept(p.value);
@@ -108,7 +99,7 @@ public class SinglyLinkedList implements Iterable<Integer>{ // 整体
 	 * @param consumer
 	 */
 	public void loop2(Consumer<Integer> consumer){
-		for(Node p = head; p != null; p = p.next){
+		for(Node p = head.next; p != null; p = p.next){
 			consumer.accept(p.value);
 		}
 	}
@@ -122,12 +113,7 @@ public class SinglyLinkedList implements Iterable<Integer>{ // 整体
 	private Node findNode(int index){
 		// 定义指针 , 索引起始点
 		Node p = head;
-		int i = 0;
-
-		// index 不合法
-		if(index < 0){
-			return null;
-		}
+		int i = -1;
 
 		for(; p.next != null; p = p.next, i++){
 			if(i == index){
@@ -147,8 +133,8 @@ public class SinglyLinkedList implements Iterable<Integer>{ // 整体
 	 */
 	public int get(int index){
 		Node node = findNode(index);
+		// 抛索引异常
 		if(node == null){
-			// 抛索引异常
 			illegalIndex(index);
 		}
 		return node.value;
@@ -161,12 +147,6 @@ public class SinglyLinkedList implements Iterable<Integer>{ // 整体
 	 * @param value 待插入值
 	 */
 	public void insert(int index, int value){
-		// 索引为0
-		if(index == 0){
-			addFirst(value);
-			return;
-		}
-
 		// 找到上一个节点
 		Node prev = findNode(index - 1);
 		if(prev == null){
