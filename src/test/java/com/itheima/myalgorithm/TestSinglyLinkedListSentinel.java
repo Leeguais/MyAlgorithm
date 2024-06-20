@@ -51,7 +51,22 @@ public class TestSinglyLinkedListSentinel{
 		}
 	}
 
+
 	@Test
+	@DisplayName("测试 addFirst")
+	public void testAddFirst(){
+		SinglyLinkedListSentinel list = new SinglyLinkedListSentinel();
+		// 链表为空
+		list.addFirst(10);
+		Assertions.assertIterableEquals(List.of(10), list);
+		// 链表非空
+		list = getLinkedList();
+		list.addFirst(0);
+		Assertions.assertIterableEquals(List.of(0,1,2,3,4), list);
+	}
+
+	@Test
+	@DisplayName("测试 addLast")
 	public void testAddLast() {
 		SinglyLinkedListSentinel list = getLinkedList();
 

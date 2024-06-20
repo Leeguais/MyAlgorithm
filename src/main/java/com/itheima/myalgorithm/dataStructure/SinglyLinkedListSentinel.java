@@ -5,7 +5,7 @@ import java.util.function.Consumer;
 
 /**
  * @author 李鸿儒
- * @Description 单向链表
+ * @Description 单向链表(哨兵)
  * @date 2024/6/19 9:22
  * @Version 1.0
  */
@@ -50,8 +50,7 @@ public class SinglyLinkedListSentinel implements Iterable<Integer>{ // 整体
 	 * @param value 添加元素的值
 	 */
 	public void addFirst(int value){
-		// 链表为空 or 非空
-		head = new Node(value, head);
+		insert(0, value);
 	}
 
 	/**
@@ -115,7 +114,7 @@ public class SinglyLinkedListSentinel implements Iterable<Integer>{ // 整体
 		Node p = head;
 		int i = -1;
 
-		for(; p.next != null; p = p.next, i++){
+		for(; p != null; p = p.next, i++){
 			if(i == index){
 				return p;
 			}
