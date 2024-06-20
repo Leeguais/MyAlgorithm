@@ -82,7 +82,22 @@ public class TestSinglyLinkedList {
 
 		// 索引不合法
 		// list.insert(10, 10);
+	}
+	@Test
+	@DisplayName("测试 insert")
+	public void testRemovFirst(){
+		SinglyLinkedList list = new SinglyLinkedList();
+		list.addLast(0);
+		list.addLast(1);
+		list.addLast(2);
+		list.addLast(3);
+
+		list.removeFirst();
+		Assertions.assertIterableEquals(List.of(1,2,3), list);
+		list.removeFirst();
+		Assertions.assertIterableEquals(List.of(2,3), list);
 
 	}
+
 
 }

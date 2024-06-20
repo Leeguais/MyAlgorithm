@@ -10,7 +10,7 @@ import java.util.function.Consumer;
  * @Version 1.0
  */
 public class SinglyLinkedList implements Iterable<Integer>{ // 整体
-	// 头指针
+	// 头指针，链表为空是为 null , 链表非空时为第一个元素
 	private Node head = null;
 
 	/**
@@ -169,6 +169,20 @@ public class SinglyLinkedList implements Iterable<Integer>{ // 整体
 			illegalIndex(index);
 		}
 		prev.next = new Node(value, prev.next);
+	}
+
+
+	/**
+	 * 移除链表中第一个元素
+	 */
+	public void removeFirst(){
+		// 链表为空
+		if(head == null){
+			illegalIndex(0);
+		}
+
+		// 链表非空
+		head = head.next;
 	}
 
 
