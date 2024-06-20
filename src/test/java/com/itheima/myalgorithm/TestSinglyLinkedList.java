@@ -84,7 +84,7 @@ public class TestSinglyLinkedList {
 		// list.insert(10, 10);
 	}
 	@Test
-	@DisplayName("测试 insert")
+	@DisplayName("测试 removeFirst")
 	public void testRemovFirst(){
 		SinglyLinkedList list = new SinglyLinkedList();
 		list.addLast(0);
@@ -96,6 +96,31 @@ public class TestSinglyLinkedList {
 		Assertions.assertIterableEquals(List.of(1,2,3), list);
 		list.removeFirst();
 		Assertions.assertIterableEquals(List.of(2,3), list);
+
+	}
+
+	@Test
+	@DisplayName("测试 removeIndex")
+	public void testRemoveIndex(){
+		SinglyLinkedList list = new SinglyLinkedList();
+		list.addLast(0);
+		list.addLast(1);
+		list.addLast(2);
+		list.addLast(3);
+
+		list.removeIndex(0);
+		Assertions.assertIterableEquals(List.of(1,2,3), list);
+		list.removeIndex(1);
+		Assertions.assertIterableEquals(List.of(1,3), list);
+
+		// list.removeIndex(-2);
+		SinglyLinkedList list2 = new SinglyLinkedList();
+		list2.addLast(0);
+		list2.addLast(1);
+		list2.addLast(2);
+		list2.addLast(3);
+
+		// list2.removeIndex(4); 测试 removed 为 null
 
 	}
 

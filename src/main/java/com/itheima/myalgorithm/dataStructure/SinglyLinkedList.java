@@ -124,6 +124,11 @@ public class SinglyLinkedList implements Iterable<Integer>{ // 整体
 		Node p = head;
 		int i = 0;
 
+		// index 不合法
+		if(index < 0){
+			return null;
+		}
+
 		for(; p.next != null; p = p.next, i++){
 			if(i == index){
 				return p;
@@ -185,6 +190,24 @@ public class SinglyLinkedList implements Iterable<Integer>{ // 整体
 		head = head.next;
 	}
 
+	public void removeIndex(int index){
+		// 索引为0
+		if(index == 0){
+			removeFirst();
+			return;
+		}
+
+		// 索引不为0
+		Node prev = findNode(index - 1);
+		if(prev == null){
+			illegalIndex(index);
+		}
+		Node removed = prev.next;
+		if(removed == null){
+			illegalIndex(index);
+		}
+		prev.next = removed.next;
+	}
 
 	/**
 	 * 节点类
