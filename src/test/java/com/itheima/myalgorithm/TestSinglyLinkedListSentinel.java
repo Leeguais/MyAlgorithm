@@ -112,29 +112,40 @@ public class TestSinglyLinkedListSentinel{
 	public void testRemovFirst(){
 		SinglyLinkedListSentinel list = getLinkedList();
 
-
 		list.removeFirst();
-		Assertions.assertIterableEquals(List.of(1,2,3), list);
+		Assertions.assertIterableEquals(List.of(2,3,4), list);
 		list.removeFirst();
-		Assertions.assertIterableEquals(List.of(2,3), list);
-
+		Assertions.assertIterableEquals(List.of(3,4), list);
+		list.removeFirst();
+		Assertions.assertIterableEquals(List.of(4), list);
+		list.removeFirst();
+		Assertions.assertIterableEquals(List.of(), list);
+		// 链表为空继续删除 抛出异常
+		Assertions.assertThrows(IllegalArgumentException.class, list :: removeFirst);
 	}
 
 	@Test
 	@DisplayName("测试 removeIndex")
 	public void testRemoveIndex(){
 		SinglyLinkedListSentinel list = getLinkedList();
+		/*
+		list   1,2,3,4
+		index  0,1,2,3
+		 */
 
+		// 头部删除
 		list.removeIndex(0);
-		Assertions.assertIterableEquals(List.of(1, 2, 3), list);
-		list.removeIndex(1);
-		Assertions.assertIterableEquals(List.of(1, 3), list);
-
-		// list.removeIndex(-2);
-		// Assertions.assertThrows(IllegalArgumentException.class, () -> getLinkedList().removeIndex(-2));
-
-		// list2.removeIndex(4); 测试 removed 为 null
-
+		Assertions.assertIterableEquals(List.of(2,3,4), list);
+		// 中间删除
+		list = getLinkedList();
+		list.removeIndex(2);
+		Assertions.assertIterableEquals(List.of(1,2,4), list);
+		// 尾部删除
+		list = getLinkedList();
+		list.removeIndex(3);
+		Assertions.assertIterableEquals(List.of(1,2,3), list);
+		// 删除索引不合法
+		Assertions.assertThrows(IllegalArgumentException.class, () -> getLinkedList().removeIndex(-2));
 	}
 
 	@Test

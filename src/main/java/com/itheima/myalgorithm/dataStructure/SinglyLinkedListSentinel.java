@@ -160,23 +160,14 @@ public class SinglyLinkedListSentinel implements Iterable<Integer>{ // 整体
 	 * 移除链表中第一个元素
 	 */
 	public void removeFirst(){
-		// 链表为空
-		if(head == null){
-			illegalIndex(0);
-		}
-
-		// 链表非空
-		head = head.next;
+		removeIndex(0);
 	}
 
+	/**
+	 * 从索引位置删除
+	 * @param index 索引
+	 */
 	public void removeIndex(int index){
-		// 索引为0
-		if(index == 0){
-			removeFirst();
-			return;
-		}
-
-		// 索引不为0
 		Node prev = findNode(index - 1);
 		if(prev == null){
 			illegalIndex(index);
